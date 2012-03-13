@@ -256,17 +256,31 @@ typedef struct { ot_ip6 ip; ot_time last_fullscrape; } ot_scrape_log;
 
 #ifdef WANT_FILE_REPLICATION
 static ssize_t http_handle_filereplication( const int64 sock, struct ot_workstruct *ws ) {
-    printf("FileReplication http handle");
-    //browse torrents and send one
-    int mutex = 0,j;
-    ot_torrent current;
-    ot_vector * torrents_list = mutex_bucket_lock( mutex );
-    for( j=0; j<torrents_list->size; ++j ) {
-        current     =  ((ot_torrent*)(torrents_list->data))[j];
-        break;
+    ot_torrent* current = 0;    //current torrent declaration
+    int bucket;
+    size_t j;
+    
+    for( bucket=0; bucket<OT_BUCKET_COUNT; ++bucket ) {
+        ot_vector  *torrents_list = mutex_bucket_lock( bucket );
+        ot_torrent *torrents = (ot_torrent*)(torrents_list->data);
+        
+        for( j=0; j<torrents_list->size; ++j )
+            current = torrents + j;
+
+        
+        mutex_bucket_unlock( bucket, 0 );
+        //if( !g_opentracker_running ) return;
     }
-    mutex_bucket_unlock( mutex, 0 );
-    ws->reply_size = return_tcp_file_replication(&current, ws->reply );
+    
+    printf("FileReplication http handle");
+    
+    
+    //case of no torrents
+    if(current == 0){
+        return ws->reply_size = sprintf( ws->reply, "d14:failure reason23:no torrent to replicate.e" );
+    }
+    
+    ws->reply_size = return_tcp_file_replication(current->hash, ws->reply );
     stats_issue_event( EVENT_SCRAPE, FLAG_TCP, ws->reply_size );
     return ws->reply_size;
 }

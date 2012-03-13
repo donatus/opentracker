@@ -349,19 +349,17 @@ size_t return_tcp_scrape_for_torrent( ot_hash *hash_list, int amount, char *repl
 
 /* file replication HTTP answer */
 
-size_t return_tcp_file_replication(ot_torrent* torrent, char *reply ) {
-    ot_vector   *torrents_list = mutex_bucket_lock_by_hash( torrent->hash );
-    int          delta_torrentcount = 0;
-    char *r = reply;
-    ot_hash* hash   = &torrent->hash;
+size_t return_tcp_file_replication(ot_hash hash, char *reply ) {
+    //ot_vector   *torrents_list = mutex_bucket_lock_by_hash( torrent->hash );
+    int  delta_torrentcount = 0;
+    char *r     = reply;
+    //ot_hash* hash   = &torrent->hash;
     //send the hash value of the current torrent to download
     r += sprintf( r, "d4:hash" );
     *r++='2';*r++='0';*r++=':';
     memcpy( r, hash, sizeof(ot_hash) ); 
     r+=sizeof(ot_hash);
     *r++ = 'e';
-    
-    mutex_bucket_unlock_by_hash( *hash, delta_torrentcount );
     return r - reply;
     }
 
