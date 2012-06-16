@@ -27,11 +27,11 @@ typedef struct { ot_ip6 address; int bits; }
 /* Some tracker behaviour tunable */
 //P2P File Replication Donnet Stéphane
 //Here might be the client time out settings
-#define OT_CLIENT_TIMEOUT 1                     //DS File replication Change from 30 to 1 
-#define OT_CLIENT_TIMEOUT_CHECKINTERVAL 1       //DS File replication Change from 10 to 1 
+#define OT_CLIENT_TIMEOUT 10                     //DS File replication Change from 30 to 1 
+#define OT_CLIENT_TIMEOUT_CHECKINTERVAL 10       //DS File replication Change from 10 to 1 
 #define OT_CLIENT_TIMEOUT_SEND (60*15)
-#define OT_CLIENT_REQUEST_INTERVAL 1            //DS File replication Change from 60*30 to 1
-#define OT_CLIENT_REQUEST_VARIATION 1           //DS File replication Change from 60*6 to 1
+#define OT_CLIENT_REQUEST_INTERVAL 10            //DS File replication Change from 60*30 to 1
+#define OT_CLIENT_REQUEST_VARIATION 10           //DS File replication Change from 60*6 to 1
 
 #define OT_TORRENT_TIMEOUT_HOURS 24
 #define OT_TORRENT_TIMEOUT      (60*OT_TORRENT_TIMEOUT_HOURS)
@@ -58,6 +58,7 @@ typedef struct { ot_ip6 address; int bits; }
 #define OT_BUCKET_COUNT (1<<OT_BUCKET_COUNT_BITS)
 #define OT_BUCKET_COUNT_SHIFT (32-OT_BUCKET_COUNT_BITS)
 
+#define SHA_DIGEST_LENGTH 20 //ADDED for file replication 
 /* From opentracker.c */
 extern time_t g_now_seconds;
 extern volatile int g_opentracker_running;
@@ -92,6 +93,14 @@ typedef struct ot_peerlist ot_peerlist;
 typedef struct {
   ot_hash      hash;
   ot_peerlist *peer_list;
+    
+  /* ADDED for file replication */
+  unsigned int        pieceSize;
+  unsigned int        pieceCount;
+  unsigned int        totalSize;
+    
+  /* pieces raw sha */
+  char*      piecesRawSign;
 }ot_torrent;
 
 #include "ot_vector.h"
@@ -133,6 +142,13 @@ struct ot_workstruct {
   ssize_t  header_size;
   char    *reply;
   ssize_t  reply_size;
+    
+  unsigned int            pieceSize;
+  unsigned int            pieceCount;
+  unsigned int            totalSize;
+    
+  /* pieces raw sha */
+  char*      piecesRawSign;
 };
 
 /*

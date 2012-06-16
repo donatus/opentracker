@@ -264,15 +264,17 @@ static ssize_t http_handle_filereplication( const int64 sock, struct ot_workstru
         ot_vector  *torrents_list = mutex_bucket_lock( bucket );
         ot_torrent *torrents = (ot_torrent*)(torrents_list->data);
         
-        for( j=0; j<torrents_list->size; ++j )
-            current = torrents + j;
+        for( j=0; j<torrents_list->size; ++j ){
+            if((torrents + j)->piecesRawSign != NULL && (current == NULL || current->peer_list->seed_count > (torrents + j)->peer_list->seed_count))
+                current = torrents + j;
+        }
 
         
         mutex_bucket_unlock( bucket, 0 );
         //if( !g_opentracker_running ) return;
     }
     
-    printf("FileReplication http handle");
+    //printf("FileReplication http handle");
     
     
     //case of no torrents
@@ -280,7 +282,7 @@ static ssize_t http_handle_filereplication( const int64 sock, struct ot_workstru
         return ws->reply_size = sprintf( ws->reply, "d14:failure reason23:no torrent to replicate.e" );
     }
     
-    ws->reply_size = return_tcp_file_replication(current->hash, ws->reply );
+    ws->reply_size = return_tcp_file_replication(current->hash, current->pieceCount,current->pieceSize,current->totalSize, current->piecesRawSign, ws->reply );
     stats_issue_event( EVENT_SCRAPE, FLAG_TCP, ws->reply_size );
     return ws->reply_size;
 }
@@ -403,6 +405,10 @@ static ot_keywords keywords_announce[] = { { "port", 1 }, { "left", 2 }, { "even
 { "lognet", 8 },
 #endif
 { "peer_id", 9 },
+{ "piece_size", 10 },
+{ "piece_count", 11 },
+{ "total_size", 12 },
+{ "piece_signs", 13 },
 { NULL, -3 } };
 static ot_keywords keywords_announce_event[] = { { "completed", 1 }, { "stopped", 2 }, { NULL, -3 } };
 
@@ -532,8 +538,24 @@ static ssize_t http_handle_announce( const int64 sock, struct ot_workstruct *ws,
         break;
       case 9: /* matched "peer_id" */
         /* ignore this, when we have less than 20 bytes */
-        if( scan_urlencoded_query( &read_ptr, write_ptr = read_ptr, SCAN_SEARCHPATH_VALUE ) != 20 ) HTTPERROR_400_PARAM;
+        if(scan_urlencoded_query( &read_ptr, write_ptr = read_ptr, SCAN_SEARCHPATH_VALUE ) != 20) HTTPERROR_400_PARAM;
         ws->peer_id = write_ptr;
+        break;
+      case 10: /*piece_size*/
+            if( scan_urlencoded_query( &read_ptr, write_ptr = read_ptr, SCAN_SEARCHPATH_VALUE ) <= 0 ) HTTPERROR_400_PARAM;
+            scan_uint(write_ptr, &ws->pieceSize);
+        break;
+      case 11: /*piece_count*/
+            if( scan_urlencoded_query( &read_ptr, write_ptr = read_ptr, SCAN_SEARCHPATH_VALUE ) <= 0 ) HTTPERROR_400_PARAM;
+            scan_uint(write_ptr, &ws->pieceCount);
+        break;
+      case 12: /*total_size*/
+            if( scan_urlencoded_query( &read_ptr, write_ptr = read_ptr, SCAN_SEARCHPATH_VALUE ) <= 0 ) HTTPERROR_400_PARAM;
+             scan_uint(write_ptr, &ws->totalSize);
+        break;
+      case 13: /*piece_signs*/
+            scan_urlencoded_query( &read_ptr, write_ptr = read_ptr, SCAN_SEARCHPATH_VALUE);
+            ws->piecesRawSign = (char*) write_ptr;
         break;
     }
   }

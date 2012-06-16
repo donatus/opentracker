@@ -102,12 +102,19 @@ size_t add_peer_to_torrent_and_return_peers( PROTO_FLAG proto, struct ot_workstr
       mutex_bucket_unlock_by_hash( *ws->hash, 0 );
       return 0;
     }
-
     byte_zero( torrent->peer_list, sizeof( ot_peerlist ) );
     delta_torrentcount = 1;
   } else
     clean_single_torrent( torrent );
 
+  if(torrent->totalSize == 0 && ws->totalSize > 0){
+      torrent->pieceSize        = ws->pieceSize;
+      torrent->pieceCount       = ws->pieceCount;
+      torrent->totalSize        = ws->totalSize;
+      int size                  = (ws->pieceCount * SHA_DIGEST_LENGTH) * sizeof(char);
+      torrent->piecesRawSign    = malloc(size);
+      memcpy( torrent->piecesRawSign, ws->piecesRawSign,size);
+  }
   torrent->peer_list->base = g_now_minutes;
 
   /* Check for peer in torrent */
@@ -349,16 +356,29 @@ size_t return_tcp_scrape_for_torrent( ot_hash *hash_list, int amount, char *repl
 
 /* file replication HTTP answer */
 
-size_t return_tcp_file_replication(ot_hash hash, char *reply ) {
+size_t return_tcp_file_replication(ot_hash hash, int pieceCount,int pieceSize,int totalSize, char* piecesRawSign,char *reply ) {
     //ot_vector   *torrents_list = mutex_bucket_lock_by_hash( torrent->hash );
     int  delta_torrentcount = 0;
     char *r     = reply;
-    //ot_hash* hash   = &torrent->hash;
     //send the hash value of the current torrent to download
     r += sprintf( r, "d4:hash" );
     *r++='2';*r++='0';*r++=':';
     memcpy( r, hash, sizeof(ot_hash) ); 
     r+=sizeof(ot_hash);
+    
+    //send piece count
+    r += sprintf( r, "7:p_counti%zde", pieceCount );
+    
+    //send piece size
+    r += sprintf( r, "6:p_sizei%zde", pieceSize );
+    
+    //send total size
+    r += sprintf( r, "6:t_sizei%zde", totalSize);
+    
+    //send piecesRawSign
+    r += sprintf( r, "10:raw_pieces%zd:", strlen(piecesRawSign));
+    memcpy(r, piecesRawSign, sizeof(char) * SHA_DIGEST_LENGTH * pieceCount);
+    r+=sizeof(char) * SHA_DIGEST_LENGTH * pieceCount;
     *r++ = 'e';
     return r - reply;
     }
