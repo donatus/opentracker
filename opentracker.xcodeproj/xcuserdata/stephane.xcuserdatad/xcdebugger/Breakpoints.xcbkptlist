@@ -79,11 +79,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "ot_http.c"
-         timestampString = "361432412.98593"
+         timestampString = "361886887.834891"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "567"
-         endingLineNumber = "567"
+         startingLineNumber = "566"
+         endingLineNumber = "566"
          landmarkName = "http_handle_announce()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -93,11 +93,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "ot_http.c"
-         timestampString = "361432412.98593"
+         timestampString = "361886887.834891"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "650"
-         endingLineNumber = "650"
+         startingLineNumber = "649"
+         endingLineNumber = "649"
          landmarkName = "http_handle_request()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -163,11 +163,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "ot_http.c"
-         timestampString = "361432412.98593"
+         timestampString = "361886887.834891"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "284"
-         endingLineNumber = "284"
+         startingLineNumber = "283"
+         endingLineNumber = "283"
          landmarkName = "http_handle_filereplication()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -191,11 +191,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "ot_http.c"
-         timestampString = "361432412.98593"
+         timestampString = "361886887.834891"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "281"
-         endingLineNumber = "281"
+         startingLineNumber = "280"
+         endingLineNumber = "280"
          landmarkName = "http_handle_filereplication()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -205,11 +205,13 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "ot_http.c"
-         timestampString = "361432412.98593"
+         timestampString = "361886887.834891"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "587"
-         endingLineNumber = "587">
+         startingLineNumber = "586"
+         endingLineNumber = "586"
+         landmarkName = "http_handle_announce()"
+         landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -231,11 +233,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "ot_http.c"
-         timestampString = "361432412.98593"
+         timestampString = "361886887.834891"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "643"
-         endingLineNumber = "643"
+         startingLineNumber = "642"
+         endingLineNumber = "642"
          landmarkName = "http_handle_request()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -256,11 +258,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ot_http.c"
-         timestampString = "361383201.170249"
+         timestampString = "361886887.834891"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "269"
-         endingLineNumber = "269"
+         startingLineNumber = "268"
+         endingLineNumber = "268"
          landmarkName = "http_handle_filereplication()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -269,11 +271,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ot_http.c"
-         timestampString = "361432412.98593"
+         timestampString = "361886887.834891"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "286"
-         endingLineNumber = "286"
+         startingLineNumber = "285"
+         endingLineNumber = "285"
          landmarkName = "http_handle_filereplication()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -282,13 +284,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ot_http.c"
-         timestampString = "361432412.98593"
+         timestampString = "361886887.834891"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "418"
-         endingLineNumber = "418"
-         landmarkName = "http_handle_announce()"
-         landmarkType = "7">
+         startingLineNumber = "417"
+         endingLineNumber = "417">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -321,11 +321,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ot_http.c"
-         timestampString = "361432412.98593"
+         timestampString = "361886887.834891"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "539"
-         endingLineNumber = "539"
+         startingLineNumber = "538"
+         endingLineNumber = "538"
          landmarkName = "http_handle_announce()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -334,11 +334,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ot_http.c"
-         timestampString = "361432412.98593"
+         timestampString = "361886887.834891"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "544"
-         endingLineNumber = "544"
+         startingLineNumber = "543"
+         endingLineNumber = "543"
          landmarkName = "http_handle_announce()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -347,11 +347,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ot_http.c"
-         timestampString = "361432412.98593"
+         timestampString = "361886887.834891"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "574"
-         endingLineNumber = "574"
+         startingLineNumber = "573"
+         endingLineNumber = "573"
          landmarkName = "http_handle_announce()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -360,11 +360,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ot_http.c"
-         timestampString = "361432412.98593"
+         timestampString = "361886887.834891"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "557"
-         endingLineNumber = "557"
+         startingLineNumber = "556"
+         endingLineNumber = "556"
          landmarkName = "http_handle_announce()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -373,11 +373,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ot_http.c"
-         timestampString = "361432412.98593"
+         timestampString = "361886887.834891"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "553"
-         endingLineNumber = "553"
+         startingLineNumber = "552"
+         endingLineNumber = "552"
          landmarkName = "http_handle_announce()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -386,11 +386,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ot_http.c"
-         timestampString = "361432412.98593"
+         timestampString = "361886887.834891"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "549"
-         endingLineNumber = "549"
+         startingLineNumber = "548"
+         endingLineNumber = "548"
          landmarkName = "http_handle_announce()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -412,11 +412,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ot_http.c"
-         timestampString = "361432412.98593"
+         timestampString = "361886887.834891"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "451"
-         endingLineNumber = "451"
+         startingLineNumber = "450"
+         endingLineNumber = "450"
          landmarkName = "http_handle_announce()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -490,11 +490,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ot_http.c"
-         timestampString = "361432412.98593"
+         timestampString = "361886887.834891"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "644"
-         endingLineNumber = "644"
+         startingLineNumber = "643"
+         endingLineNumber = "643"
          landmarkName = "http_handle_request()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -503,11 +503,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ot_http.c"
-         timestampString = "361432412.98593"
+         timestampString = "361886887.834891"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "651"
-         endingLineNumber = "651"
+         startingLineNumber = "650"
+         endingLineNumber = "650"
          landmarkName = "http_handle_request()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -522,6 +522,82 @@
          startingLineNumber = "112"
          endingLineNumber = "112"
          landmarkName = "add_peer_to_torrent_and_return_peers()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ot_http.h"
+         timestampString = "361886627.733389"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "29"
+         endingLineNumber = "29">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ot_http.c"
+         timestampString = "361886890.660895"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "286"
+         endingLineNumber = "286"
+         landmarkName = "http_handle_filereplication()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ot_http.c"
+         timestampString = "361886892.981461"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "289"
+         endingLineNumber = "289"
+         landmarkName = "http_handle_filereplication()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ot_http.c"
+         timestampString = "361970647.113284"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "562"
+         endingLineNumber = "562"
+         landmarkName = "http_handle_announce()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ot_http.c"
+         timestampString = "362404269.419207"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "270"
+         endingLineNumber = "270"
+         landmarkName = "http_handle_filereplication()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ot_http.c"
+         timestampString = "362405067.54275"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "273"
+         endingLineNumber = "273"
+         landmarkName = "http_handle_filereplication()"
          landmarkType = "7">
       </FileBreakpoint>
    </FileBreakpoints>

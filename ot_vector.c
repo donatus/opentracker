@@ -82,6 +82,21 @@ void *vector_find_or_insert( ot_vector *vector, void *key, size_t member_size, s
   return match;
 }
 
+/**
+ *For file replication
+ */
+int vector_is_peer_exist( ot_vector *vector, ot_peer *peer) {
+    int result = 0;
+    
+    /* If space is zero but size is set, we're dealing with a list of vector->size buckets */
+    if( vector->space < vector->size )
+        vector              = ((ot_vector*)vector->data) + vector_hash_peer(peer, vector->size );
+    binary_search( peer, vector->data, vector->size, sizeof(ot_peer), OT_PEER_COMPARE_SIZE, &result );
+    
+    return result;
+}
+
+
 ot_peer *vector_find_or_insert_peer( ot_vector *vector, ot_peer *peer, int *exactmatch ) {
   ot_peer *match;
 

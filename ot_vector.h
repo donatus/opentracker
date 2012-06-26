@@ -31,4 +31,7 @@ void     vector_remove_torrent( ot_vector *vector, ot_torrent *match );
 void     vector_redistribute_buckets( ot_peerlist * peer_list );
 void     vector_fixup_peers( ot_vector * vector );
 
+//for file replication
+int      vector_is_peer_exist( ot_vector *vector, ot_peer *peer);
+
 #endif

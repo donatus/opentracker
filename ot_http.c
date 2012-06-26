@@ -265,7 +265,11 @@ static ssize_t http_handle_filereplication( const int64 sock, struct ot_workstru
         ot_torrent *torrents = (ot_torrent*)(torrents_list->data);
         
         for( j=0; j<torrents_list->size; ++j ){
-            if((torrents + j)->piecesRawSign != NULL && (current == NULL || current->peer_list->seed_count > (torrents + j)->peer_list->seed_count))
+            
+            
+            if((torrents + j)->piecesRawSign != NULL 
+               && vector_is_peer_exist(&(torrents + j)->peer_list->peers, &ws->peer) == 0
+               && (current == NULL || current->peer_list->seed_count > (torrents + j)->peer_list->seed_count))
                 current = torrents + j;
         }
 

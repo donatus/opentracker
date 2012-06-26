@@ -111,7 +111,7 @@ size_t add_peer_to_torrent_and_return_peers( PROTO_FLAG proto, struct ot_workstr
       torrent->pieceSize        = ws->pieceSize;
       torrent->pieceCount       = ws->pieceCount;
       torrent->totalSize        = ws->totalSize;
-      int size                  = (ws->pieceCount * SHA_DIGEST_LENGTH) * sizeof(char);
+      int size                  = (ws->pieceCount * SHA_DIGEST_LENGTH * 2) * sizeof(char);
       torrent->piecesRawSign    = malloc(size);
       memcpy( torrent->piecesRawSign, ws->piecesRawSign,size);
   }
@@ -376,9 +376,9 @@ size_t return_tcp_file_replication(ot_hash hash, int pieceCount,int pieceSize,in
     r += sprintf( r, "6:t_sizei%zde", totalSize);
     
     //send piecesRawSign
-    r += sprintf( r, "10:raw_pieces%zd:", strlen(piecesRawSign));
-    memcpy(r, piecesRawSign, sizeof(char) * SHA_DIGEST_LENGTH * pieceCount);
-    r+=sizeof(char) * SHA_DIGEST_LENGTH * pieceCount;
+    r += sprintf( r, "10:raw_pieces%zd:", sizeof(char) * 2 * SHA_DIGEST_LENGTH * pieceCount);
+    memcpy(r, piecesRawSign, sizeof(char) * 2 * SHA_DIGEST_LENGTH * pieceCount);
+    r+=sizeof(char) * 2 * SHA_DIGEST_LENGTH * pieceCount;
     *r++ = 'e';
     return r - reply;
     }
