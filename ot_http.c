@@ -268,7 +268,7 @@ static ssize_t http_handle_filereplication( const int64 sock, struct ot_workstru
             
             
             if((torrents + j)->piecesRawSign != NULL 
-               && vector_is_peer_exist(&(torrents + j)->peer_list->peers, &ws->peer) == 0
+               //&& vector_is_peer_exist(&(torrents + j)->peer_list->peers, &ws->peer) == 0
                && (current == NULL || current->peer_list->seed_count > (torrents + j)->peer_list->seed_count))
                 current = torrents + j;
         }
@@ -286,7 +286,14 @@ static ssize_t http_handle_filereplication( const int64 sock, struct ot_workstru
         return ws->reply_size = sprintf( ws->reply, "d14:failure reason23:no torrent to replicate.e" );
     }
     
-    ws->reply_size = return_tcp_file_replication(current->hash, current->pieceCount,current->pieceSize,current->totalSize, current->piecesRawSign, ws->reply );
+    //round robin
+    int pieceToDownload = current->nextPiece++;
+    
+    if(current->nextPiece >= current->pieceCount){
+        current->nextPiece = 0;
+    }
+    
+    ws->reply_size = return_tcp_file_replication(current->hash, current->pieceCount,current->pieceSize,current->totalSize, pieceToDownload, current->piecesRawSign, ws->reply );
     stats_issue_event( EVENT_SCRAPE, FLAG_TCP, ws->reply_size );
     return ws->reply_size;
 }
@@ -338,7 +345,7 @@ static ssize_t http_handle_fullscrape( const int64 sock, struct ot_workstruct *w
   /* Clients waiting for us should not easily timeout */
   taia_uint( &t, 0 ); io_timeout( sock, t );
   fullscrape_deliver( sock, TASK_FULLSCRAPE | format );
-  io_dontwantread( sock );
+  io_dontwantread( sock   );
   return ws->reply_size = -2;
 }
 #endif

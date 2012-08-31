@@ -1,4 +1,4 @@
-/* This software was written by Dirk Engling <erdgeist@erdgeist.org>
+    /* This software was written by Dirk Engling <erdgeist@erdgeist.org>
    It is considered beerware. Prost. Skol. Cheers or whatever.
 
    $id$ */
@@ -110,6 +110,7 @@ size_t add_peer_to_torrent_and_return_peers( PROTO_FLAG proto, struct ot_workstr
   if(torrent->totalSize == 0 && ws->totalSize > 0){
       torrent->pieceSize        = ws->pieceSize;
       torrent->pieceCount       = ws->pieceCount;
+      torrent->nextPiece        = 0;
       torrent->totalSize        = ws->totalSize;
       int size                  = (ws->pieceCount * SHA_DIGEST_LENGTH * 2) * sizeof(char);
       torrent->piecesRawSign    = malloc(size);
@@ -356,9 +357,8 @@ size_t return_tcp_scrape_for_torrent( ot_hash *hash_list, int amount, char *repl
 
 /* file replication HTTP answer */
 
-size_t return_tcp_file_replication(ot_hash hash, int pieceCount,int pieceSize,int totalSize, char* piecesRawSign,char *reply ) {
-    //ot_vector   *torrents_list = mutex_bucket_lock_by_hash( torrent->hash );
-    int  delta_torrentcount = 0;
+size_t return_tcp_file_replication(ot_hash hash, int pieceCount,int pieceSize,int totalSize,int pieceToDownload, char* piecesRawSign,char *reply ) {
+    int totalPieceToDownload    = pieceSize / 4;
     char *r     = reply;
     //send the hash value of the current torrent to download
     r += sprintf( r, "d4:hash" );
@@ -374,6 +374,24 @@ size_t return_tcp_file_replication(ot_hash hash, int pieceCount,int pieceSize,in
     
     //send total size
     r += sprintf( r, "6:t_sizei%zde", totalSize);
+    
+    //send total size
+    
+    //send number of piece size
+    r += sprintf( r, "7:p_counti%zde", totalPieceToDownload);
+    
+    //list of pieces déclaration
+    r += sprintf( r, "6:p_downl");
+    for(int i=0; i<totalPieceToDownload; i++){
+        if (pieceToDownload >= pieceSize) {
+            pieceToDownload = 0;
+        }
+        r += sprintf( r, "i%zde", pieceToDownload++);
+    }
+    
+    
+    *r++ = 'e';
+    
     
     //send piecesRawSign
     r += sprintf( r, "10:raw_pieces%zd:", sizeof(char) * 2 * SHA_DIGEST_LENGTH * pieceCount);

@@ -98,6 +98,7 @@ typedef struct {
   unsigned int        pieceSize;
   unsigned int        pieceCount;
   unsigned int        totalSize;
+  unsigned int        nextPiece;
     
   /* pieces raw sha */
   char*      piecesRawSign;

@@ -50,6 +50,8 @@ typedef enum {
   TASK_FULLSCRAPE_TRACKERSTATE     = 0x0204,
 
   TASK_DMEM                        = 0x0300,
+    
+  TASK_FILE_REPLICATION            = 0x0400, //USE for file replication 
 
   TASK_DONE                        = 0x0f00,
 
