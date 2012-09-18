@@ -27,6 +27,7 @@
 #include "ot_accesslist.h"
 #include "ot_fullscrape.h"
 #include "ot_livesync.h"
+#include "ot_filereplication.h"
 
 /* Forward declaration */
 size_t return_peers_for_torrent( ot_torrent *torrent, size_t amount, char *reply, PROTO_FLAG proto );
@@ -475,6 +476,7 @@ void trackerlogic_init( ) {
   mutex_init( );
   clean_init( );
   fullscrape_init( );
+  filereplication_init();
   accesslist_init( );
   livesync_init( );
   stats_init( );

@@ -29,6 +29,7 @@
 #include "ot_fullscrape.h"
 #include "ot_stats.h"
 #include "ot_accesslist.h"
+#include "ot_filereplication.h"
 
 #define OT_MAXMULTISCRAPE_COUNT 64
 extern char *g_redirecturl;
@@ -256,47 +257,20 @@ typedef struct { ot_ip6 ip; ot_time last_fullscrape; } ot_scrape_log;
 
 #ifdef WANT_FILE_REPLICATION
 static ssize_t http_handle_filereplication( const int64 sock, struct ot_workstruct *ws ) {
-    ot_torrent* current = 0;    //current torrent declaration
-    int bucket;
-    size_t j;
+    struct http_data* cookie = io_getcookie( sock );
+    int format = 0;
+    tai6464 t;
     
-    for( bucket=0; bucket<OT_BUCKET_COUNT; ++bucket ) {
-        ot_vector  *torrents_list = mutex_bucket_lock( bucket );
-        ot_torrent *torrents = (ot_torrent*)(torrents_list->data);
-        
-        for( j=0; j<torrents_list->size; ++j ){
-            
-            
-            if((torrents + j)->piecesRawSign != NULL 
-               //&& vector_is_peer_exist(&(torrents + j)->peer_list->peers, &ws->peer) == 0
-               && (current == NULL || current->peer_list->seed_count > (torrents + j)->peer_list->seed_count))
-                current = torrents + j;
-        }
-
-        
-        mutex_bucket_unlock( bucket, 0 );
-        //if( !g_opentracker_running ) return;
-    }
-    
-    //printf("FileReplication http handle");
+    /* Pass this task to the worker thread */
+    cookie->flag |= STRUCT_HTTP_FLAG_WAITINGFORTASK;
+    /* Clients waiting for us should not easily timeout */
+    taia_uint( &t, 0 ); io_timeout( sock, t );
+    filereplication_deliver( sock, TASK_FILE_REPLICATION | format );
+    io_dontwantread(sock);
+    return ws->reply_size = -2;
     
     
-    //case of no torrents
-    if(current == 0){
-        return ws->reply_size = sprintf( ws->reply, "d14:failure reason23:no torrent to replicate.e" );
-    }
-    
-    //round robin
-    int pieceToDownload = current->nextPiece++;
-    
-    if(current->nextPiece >= current->pieceCount){
-        current->nextPiece = 0;
-    }
-    
-    ws->reply_size = return_tcp_file_replication(current->hash, current->pieceCount,current->pieceSize,current->totalSize, pieceToDownload, current->piecesRawSign, ws->reply );
-    stats_issue_event( EVENT_SCRAPE, FLAG_TCP, ws->reply_size );
-    return ws->reply_size;
-}
+   }
 #endif
 
 #ifdef WANT_FULLSCRAPE

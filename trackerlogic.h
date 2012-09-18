@@ -27,11 +27,11 @@ typedef struct { ot_ip6 address; int bits; }
 /* Some tracker behaviour tunable */
 //P2P File Replication Donnet Stéphane
 //Here might be the client time out settings
-#define OT_CLIENT_TIMEOUT 10                     //DS File replication Change from 30 to 1 
+#define OT_CLIENT_TIMEOUT 30                     //DS File replication Change from 30 to 1
 #define OT_CLIENT_TIMEOUT_CHECKINTERVAL 10       //DS File replication Change from 10 to 1 
 #define OT_CLIENT_TIMEOUT_SEND (60*15)
-#define OT_CLIENT_REQUEST_INTERVAL 10            //DS File replication Change from 60*30 to 1
-#define OT_CLIENT_REQUEST_VARIATION 10           //DS File replication Change from 60*6 to 1
+#define OT_CLIENT_REQUEST_INTERVAL 6*30            //DS File replication Change from 60*30 to 1
+#define OT_CLIENT_REQUEST_VARIATION 6*6           //DS File replication Change from 60*6 to 1
 
 #define OT_TORRENT_TIMEOUT_HOURS 24
 #define OT_TORRENT_TIMEOUT      (60*OT_TORRENT_TIMEOUT_HOURS)
